@@ -8,6 +8,7 @@ import sys
 from typing import Any, Dict, List
 from faultforge.chaos.injector import ChaosInjector, ChaosPolicy, InjectedFaultError
 from faultforge.chaos.shrinker import FaultShrinker, FaultStep
+from faultforge.engine.checkpointer import MerkleTree
 from faultforge.engine.dag import WorkflowDAG
 from faultforge.engine.runtime import DurableRuntime
 from faultforge.engine.wal import EventType, WriteAheadLog
@@ -51,12 +52,14 @@ def cmd_run(args: argparse.Namespace, wal: WriteAheadLog) -> int:
         return 1
 
     history = wal.get_history(args.run_id)
+    merkle_tree = MerkleTree(result)
     summary = {
         "run_id": args.run_id,
         "seed": args.seed,
         "fail_rate": args.fail_rate,
         "injected_faults": chaos.injected_faults,
         "wal_events_recorded": len(history),
+        "state_merkle_root": merkle_tree.root_hash[:24],
         "final_output": result,
     }
     print(json.dumps(summary, indent=2))
