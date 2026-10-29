@@ -1,0 +1,1 @@
+Run the FaultForge chaos simulation suite with seed $ARGUMENTS, inspect the Write-Ahead Log (WAL) event trajectory for any non-deterministic state divergence, and run `pytest -v -k test_chaos` to verify replay idempotency.

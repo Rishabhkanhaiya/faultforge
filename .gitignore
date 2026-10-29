@@ -1,0 +1,21 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+*.db
+*.sqlite3
+.env
+.DS_Store
+
+# Claude Code local overrides
+.claude/settings.local.json
+.claude/*.local.md
+
+# Local IDE / Workspace ignores
+.antigravity/
+.gemini/
+.vscode/
+.idea/
