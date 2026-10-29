@@ -1,0 +1,1 @@
+Execute two runs of the target workflow with identical seeds using `python -m faultforge.cli run --run-id run_a` and `python -m faultforge.cli run --run-id run_b`, then execute `python -m faultforge.cli diff --run-a run_a --run-b run_b` with `TrajectoryDiffer` to verify zero non-deterministic state mutations or ordering divergences.

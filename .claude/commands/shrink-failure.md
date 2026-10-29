@@ -1,0 +1,1 @@
+Run the FaultForge Delta-Debugging fault schedule minimizer with `python -m faultforge.cli shrink`, inspect the minimal 1-minimal fault sequence that triggers the target failure, and construct an automated regression test in `tests/test_fault_shrinker.py`.
