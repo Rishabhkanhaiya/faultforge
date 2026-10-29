@@ -37,15 +37,25 @@ class WorkerLease:
     version: int
     heartbeat_count: int
 
-    def is_expired(self, current_time: Optional[float] = None) -> bool:
+    def is_expired(
+        self,
+        current_time: Optional[float] = None,
+        now: Optional[float] = None,
+    ) -> bool:
         """Check if the lease has expired past its TTL."""
-        now = current_time if current_time is not None else time.time()
-        return now >= self.expires_at
+        t = now if now is not None else current_time
+        curr = t if t is not None else time.time()
+        return curr >= self.expires_at
 
-    def time_remaining(self, current_time: Optional[float] = None) -> float:
+    def time_remaining(
+        self,
+        current_time: Optional[float] = None,
+        now: Optional[float] = None,
+    ) -> float:
         """Return remaining lease duration in seconds, clamped to 0.0."""
-        now = current_time if current_time is not None else time.time()
-        return max(0.0, self.expires_at - now)
+        t = now if now is not None else current_time
+        curr = t if t is not None else time.time()
+        return max(0.0, self.expires_at - curr)
 
     def to_dict(self) -> Dict[str, Any]:
         """Serialize lease state to a dictionary."""
